@@ -27,14 +27,12 @@ def get_supabase() -> Client:
     url = SUPABASE_URL
     key = SUPABASE_SERVICE_KEY
     
-    if url and key:
-        try:
-            supabase = create_client(url, key)
-            return supabase
-        except Exception as e:
-            print(f"[WARN] Failed to initialize Supabase client: {e}")
-            return None
-    return None
+    try:
+        supabase = create_client(url, key)
+        return supabase
+    except Exception as e:
+        print(f"[WARN] Failed to initialize Supabase client: {e}")
+        return None
 
 
 # ──────────────────────────────────────────────
