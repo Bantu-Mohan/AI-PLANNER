@@ -17,7 +17,14 @@ SUPABASE_ANON_KEY    = os.getenv("SUPABASE_ANON_KEY", "")
 GROQ_API_KEY         = os.getenv("GROQ_API_KEY", "")
 
 # Used only for auth.get_user() — NOT for table queries
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+supabase: Client = None
+if SUPABASE_URL and SUPABASE_SERVICE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+    except Exception as e:
+        print(f"[WARN] Failed to initialize Supabase client: {e}")
+else:
+    print("[WARN] Supabase URL or Service Key is missing. Supabase Client not initialized.")
 
 
 # ──────────────────────────────────────────────
@@ -111,6 +118,8 @@ def get_config():
 
 def verify_token(token: str):
     """Returns (user_id, user_email) or raises Exception."""
+    if not supabase:
+        raise Exception("Supabase client is not initialized")
     user_resp  = supabase.auth.get_user(token)
     return user_resp.user.id, user_resp.user.email
 
