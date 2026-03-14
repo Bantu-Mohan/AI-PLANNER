@@ -4,4 +4,4 @@ groq
 pandas
 supabase==2.3.4
 gunicorn
-httpx
+httpx==0.27.2
