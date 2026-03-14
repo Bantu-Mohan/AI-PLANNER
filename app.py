@@ -32,7 +32,7 @@ def get_supabase() -> Client:
         return supabase
     except Exception as e:
         print(f"[WARN] Failed to initialize Supabase client: {e}")
-        return None
+        raise Exception(f"Failed to initialize Supabase client: {e}")
 
 
 # ──────────────────────────────────────────────
@@ -127,8 +127,6 @@ def get_config():
 def verify_token(token: str):
     """Returns (user_id, user_email) or raises Exception."""
     client = get_supabase()
-    if not client:
-        raise Exception("Supabase client is not initialized. Check your SUPABASE_URL and SUPABASE_SERVICE_KEY environment variables.")
     user_resp  = client.auth.get_user(token)
     return user_resp.user.id, user_resp.user.email
 
