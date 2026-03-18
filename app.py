@@ -11,9 +11,9 @@ load_dotenv()
 app = Flask(__name__, static_folder="static", template_folder="templates")
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret")
 
-SUPABASE_URL         = "https://bpzpefonhzolyzqfhagn.supabase.co"
-SUPABASE_SERVICE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwenBlZm9uaHpvbHl6cWZoYWduIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2OTUwODkwMywiZXhwIjoyMDg1MDg0OTAzfQ.Gia9NNKtNDWUONfhz4VRCXIOZHAWjIUNDYGW4iPSnXo"
-SUPABASE_ANON_KEY    = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwenBlZm9uaHpvbHl6cWZoYWduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1MDg5MDMsImV4cCI6MjA4NTA4NDkwM30.lnWK7uY_adSk9oEyDKJsUANmxMsp59f7YRym6086Ago"
+SUPABASE_URL         = os.getenv("SUPABASE_URL", "")
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")
+SUPABASE_ANON_KEY    = os.getenv("SUPABASE_ANON_KEY", "")
 GROQ_API_KEY         = os.getenv("GROQ_API_KEY", "")
 
 # Used only for auth.get_user() — NOT for table queries
